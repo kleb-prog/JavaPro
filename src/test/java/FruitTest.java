@@ -1,7 +1,10 @@
 import Lesson_1.Box;
+import Lesson_1.ConvertToList;
 import Lesson_1.Fruits.Apple;
 import Lesson_1.Fruits.Orange;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 public class FruitTest {
     @Test
@@ -40,5 +43,11 @@ public class FruitTest {
         appleBox.pour(newAppleBox);
 
         System.out.println("Старая коробка: " + appleBox.getWeight() + "\nНовая коробка с яблоками из старой: " + newAppleBox.getWeight());
+    }
+    @Test
+    void testConverter(){
+        Integer[] arr = new Integer[]{4, 7, 3, 9, 5};
+        ArrayList<Integer> list = new ConvertToList<Integer>(arr).toArrayList();
+        System.out.println(list);
     }
 }
