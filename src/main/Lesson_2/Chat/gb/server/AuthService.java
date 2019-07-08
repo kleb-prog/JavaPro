@@ -55,7 +55,8 @@ public class AuthService {
     }
 
     public static ArrayList<String> getLastMsg(){
-        String sql = ("SELECT message FROM (SELECT * FROM messages ORDER BY id DESC LIMIT 20) sub ORDER BY id ASC");
+        //String sql = ("SELECT message FROM (SELECT * FROM messages ORDER BY id DESC LIMIT 20) sub ORDER BY id ASC"); //возвращает последние 20 сообщений из истории
+        String sql = ("SELECT message FROM messages;");
         ArrayList<String> msg = new ArrayList<>();
 
         try {
