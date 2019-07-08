@@ -17,7 +17,7 @@ public class ConvertToList<T> {
         this.arr = arr;
     }
 
-    ArrayList<T> toArrayList(){
+    public ArrayList<T> toArrayList(){
         ArrayList<T> arrlist = new ArrayList<T>();
 
         for (T unit:arr) {
