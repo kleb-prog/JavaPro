@@ -38,19 +38,20 @@ public class Client {
 
     public void serialize(Player player) throws IOException {
         FileOutputStream fout = new FileOutputStream("obj.ser");
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fout));
 
         String nick = player.nick;
         Integer level = player.level;
         Integer HP = player.HP;
         Float money = player.money;
 
-        fout.write(nick.getBytes());
-        fout.write((byte)35);
-        fout.write(level.byteValue());
-        fout.write((byte)35);
-        fout.write(HP.byteValue());
-        fout.write((byte)35);
-        fout.write(money.byteValue());
-        fout.close();
+        StringBuilder sb = new StringBuilder();
+        sb.append(nick).append("#");
+        sb.append(level).append("#");
+        sb.append(HP).append("#");
+        sb.append(money);
+
+        writer.write(sb.toString());
+        writer.close();
     }
 }

@@ -3,13 +3,12 @@ package Lesson_3;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class Server {
 
     Socket client;
-    Boolean ready;
+    Boolean serialReady;
 
     public Server() throws IOException {
         ServerSocket server = new ServerSocket(8189);
@@ -17,6 +16,7 @@ public class Server {
         while (true){
             client = server.accept();
             deserialize();
+            break;
         }
     }
 
@@ -25,10 +25,13 @@ public class Server {
         Player player1;
 
         while (true){
-            if (serv.ready){
-
+            if (serv.serialReady){
+                player1 = serv.createPlayerFromSer();
+                break;
             }
         }
+
+        player1.info();
 
     }
 
@@ -45,26 +48,25 @@ public class Server {
             fos.write(buff, 0, x);
         }
 
+        serialReady = true;
+        bis.close();
+        fos.close();
+
     }
 
 
     public Player createPlayerFromSer() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("deobj.ser")));
 
-        String line;
-        ArrayList<String> lines = new ArrayList<>();
+        String[] lines = reader.readLine().split("#");
 
+        String nick = lines[0];
+        int level = Integer.parseInt(lines[1]);
+        int HP = Integer.parseInt(lines[2]);
+        float money = Float.parseFloat(lines[3]);
+        reader.close();
 
-        while ((line = reader.readLine()) != null){
-            lines.add(line);
-        }
-
-        String nick ;
-        Integer level;
-        Integer HP ;
-        Float money;
-
-        //Player player = new Player();
+        return new Player(nick, level, HP, money);
     }
 
 }
