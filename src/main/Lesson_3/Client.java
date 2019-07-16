@@ -14,6 +14,7 @@ public class Client {
         Client client = new Client();
         Player player = new Player("Grand", 80, 100, 1045645.58f);
         client.serialize(player);
+        client.sendToServer();
     }
 
 
