@@ -59,12 +59,12 @@ public class Server {
             lines.add(line);
         }
 
-        String nick = line.ge;
+        String nick ;
         Integer level;
         Integer HP ;
         Float money;
 
-        Player player = new Player();
+        //Player player = new Player();
     }
 
 }
