@@ -18,11 +18,11 @@ public class Car implements Runnable{
     public int getSpeed() {
         return speed;
     }
-    public Car(Race race, int speed, CountDownLatch cdl, CountDownLatch cd2) {
+    public Car(Race race, int speed, CountDownLatch prepare, CountDownLatch finish) {
         this.race = race;
         this.speed = speed;
-        this.cdl = cdl;
-        this.cd2 = cd2;
+        this.cdl = prepare;
+        this.cd2 = finish;
         CARS_COUNT++;
         this.name = "Участник #" + CARS_COUNT;
     }
