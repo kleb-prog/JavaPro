@@ -1,16 +1,17 @@
 package Lesson_5;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Car implements Runnable{
-    private static int CARS_COUNT;
+    private volatile static AtomicInteger CARS_COUNT;
     static {
-        CARS_COUNT = 0;
+        CARS_COUNT = new AtomicInteger();
     }
     private Race race;
     private int speed;
-    private CountDownLatch cdl;
-    private CountDownLatch cd2;
+    private CountDownLatch prepare;
+    private CountDownLatch finish;
     private String name;
     public String getName() {
         return name;
@@ -21,9 +22,9 @@ public class Car implements Runnable{
     public Car(Race race, int speed, CountDownLatch prepare, CountDownLatch finish) {
         this.race = race;
         this.speed = speed;
-        this.cdl = prepare;
-        this.cd2 = finish;
-        CARS_COUNT++;
+        this.prepare = prepare;
+        this.finish = finish;
+        CARS_COUNT.incrementAndGet();
         this.name = "Участник #" + CARS_COUNT;
     }
     @Override
@@ -32,24 +33,24 @@ public class Car implements Runnable{
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int)(Math.random() * 800));
             System.out.println(this.name + " готов");
-            cdl.countDown();
+            prepare.countDown();
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            cdl.await();
+            prepare.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
-        if (cd2.getCount() == CARS_COUNT){
+        if (finish.getCount() == CARS_COUNT.get()){
             System.out.println(this.name + " WIN!");
         }
-        cd2.countDown();
+        finish.countDown();
         try {
-            cd2.await();
+            finish.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
