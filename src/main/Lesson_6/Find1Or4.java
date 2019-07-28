@@ -2,7 +2,7 @@ package Lesson_6;
 
 public class Find1Or4 {
 
-    public boolean isContinued1Or4(int[] arr){
+    public boolean isContained1Or4(int[] arr){
         int one = 0;
         int four = 0;
 
