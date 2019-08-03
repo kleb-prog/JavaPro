@@ -16,10 +16,10 @@ public class Snake {
             for (j = k; j < SIZE - k + 1; j++) {
                 matrix[j][SIZE - k] = counter++;
             }
-            for (j = SIZE - k -1;j >= k -1; --j) {
+            for (j = SIZE - k - 1;j >= k - 1; --j) {
                 matrix[SIZE - k][j] = counter++;
             }
-            for (j = SIZE - k -1;j >= k; j--){
+            for (j = SIZE - k - 1;j >= k; j--){
                 matrix[j][k - 1] = counter++;
             }
         }
