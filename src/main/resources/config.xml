@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    <bean id ="patient" class="Lesson_8.clinic.AdultPatient"/>
+
+    <bean id="registry" class="Lesson_8.clinic.Registry">
+
+        <property name="patient">
+            <ref bean="patient"/>
+        </property>
+    </bean>
+
+</beans>
